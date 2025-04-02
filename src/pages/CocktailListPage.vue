@@ -10,24 +10,25 @@ const selectedFilter = ref('name')
 const filter = computed(() => {
   if (!search.value.trim()) return 'filter.php?c=Cocktail'
 
-  switch (selectedFilter.value) {
-    case 'ingredient':
-      return `filter.php?i=${search.value}`
-    default:
-      return `search.php?s=${search.value}`
-  }
+  return selectedFilter.value === 'ingredient'
+    ? `filter.php?i=${search.value}`
+    : `search.php?s=${search.value}`
 })
 
 const { data, loading, fetchData } = useFetch()
-fetchData(filter.value)
+
+watch(filter, () => {
+  fetchData(filter.value)
+})
 
 const goBack = () => {
   router.back()
 }
 
-watch(filter, () => {
+// aquesta funcio no seria realment necessaria, ja que el q-input ja fa la mateixa funcio amb el watch
+const goToCocktail = () => {
   fetchData(filter.value)
-})
+}
 </script>
 
 <template>
@@ -37,23 +38,24 @@ watch(filter, () => {
   <section>
     <q-select
       v-model="selectedFilter"
-      :options="['name', 'ingredient']"
+      :options="[
+        { label: 'Name', value: 'name' },
+        { label: 'Ingredient', value: 'ingredient' },
+      ]"
       label="Search by"
       class="q-mb-md"
     />
 
-    <q-input
-      filled
-      v-model="search"
-      :label="`Search for a cocktail by ${selectedFilter}`"
-      class="q-mb-md"
-      debounce="300"
-    />
+    <q-input filled v-model="search" label="Search for a cocktail" class="q-mb-md" debounce="300">
+      <template v-slot:append>
+        <q-btn flat icon="search" @click="goToCocktail" />
+      </template>
+    </q-input>
   </section>
 
   <q-list v-if="!loading && data?.drinks">
     <q-item
-      v-for="drink in data.drinks"
+      v-for="drink in data?.drinks || []"
       :key="drink.idDrink"
       clickable
       v-ripple
