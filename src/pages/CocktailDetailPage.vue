@@ -50,39 +50,112 @@ function getMeasurements(drink) {
 </script>
 
 <template>
-  <h2 v-if="!props.isRandom">Your cocktail</h2>
-  <h2 v-else>Your random cocktail</h2>
-  <q-btn label="Go Back" icon="arrow_back" color="primary" @click="goBack" class="q-mb-md" />
+  <div class="cocktail-container">
+    <h2 v-if="!props.isRandom">Your Cocktail</h2>
+    <h2 v-else>Your Random Cocktail</h2>
 
-  <div v-if="!loading && data?.drinks">
-    <q-list>
-      <q-item v-for="drink in data.drinks" :key="drink.idDrink">
-        <q-item-section avatar>
-          <q-img :src="drink.strDrinkThumb" width="50px" />
-        </q-item-section>
+    <q-btn
+      label="Go Back"
+      icon="arrow_back"
+      color="primary"
+      @click="goBack"
+      class="q-mb-md go-back-btn"
+    />
 
-        <q-item-section>
-          <q-item-label>{{ drink.strDrink }}</q-item-label>
-          <q-item-label caption>Category: {{ drink.strCategory }}</q-item-label>
-          <q-item-label caption>Type: {{ drink.strAlcoholic }}</q-item-label>
-          <q-item-label caption>Glass: {{ drink.strGlass }}</q-item-label>
-        </q-item-section>
+    <div v-if="!loading && data?.drinks">
+      <q-card v-for="drink in data.drinks" :key="drink.idDrink" class="cocktail-card">
+        <h3 class="cocktail-title">{{ drink.strDrink }}</h3>
 
-        <q-item-section>
-          <q-item-label caption>Ingredients:</q-item-label>
-          <ul>
+        <q-img :src="drink.strDrinkThumb" class="cocktail-img" />
+
+        <q-card-section>
+          <p class="cocktail-info"><strong>Category:</strong> {{ drink.strCategory }}</p>
+          <p class="cocktail-info"><strong>Type:</strong> {{ drink.strAlcoholic }}</p>
+          <p class="cocktail-info"><strong>Glass:</strong> {{ drink.strGlass }}</p>
+        </q-card-section>
+
+        <q-card-section>
+          <h4>Ingredients</h4>
+          <ul class="cocktail-ingredients">
             <li v-for="(ingredient, index) in getIngredients(drink)" :key="ingredient">
-              {{ ingredient }} - {{ getMeasurements(drink)[index] || 'No measure' }}
+              {{ ingredient }} -
+              <span class="measure">{{ getMeasurements(drink)[index] || 'No measure' }}</span>
             </li>
           </ul>
-        </q-item-section>
-        <q-item-section>
-          <q-item-label caption>Instructions:</q-item-label>
-          <p>{{ drink.strInstructions }}</p>
-        </q-item-section>
-      </q-item>
-    </q-list>
-  </div>
+        </q-card-section>
 
-  <div v-else>Your cocktail is loading...</div>
+        <q-card-section>
+          <h4>Instructions</h4>
+          <p class="cocktail-instructions">{{ drink.strInstructions }}</p>
+        </q-card-section>
+      </q-card>
+    </div>
+
+    <div v-else class="loading-text">Your cocktail is loading...</div>
+  </div>
 </template>
+
+<style scoped>
+.cocktail-container {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+.go-back-btn {
+  margin-bottom: 20px;
+}
+
+.cocktail-card {
+  background-color: #f8f8f8;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.cocktail-img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.cocktail-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+}
+
+.cocktail-info {
+  font-size: 14px;
+  color: #666;
+}
+
+.cocktail-ingredients {
+  list-style: none;
+  padding: 0;
+}
+
+.cocktail-ingredients li {
+  background: #eaeaea;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 8px;
+}
+
+.measure {
+  font-weight: bold;
+  color: #555;
+}
+
+.cocktail-instructions {
+  text-align: left;
+  background: #fff3cd;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.loading-text {
+  font-size: 18px;
+  color: #888;
+}
+</style>
