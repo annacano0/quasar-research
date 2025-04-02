@@ -5,27 +5,26 @@ import { ref, computed, watch } from 'vue'
 
 const router = useRouter()
 const search = ref('')
-const selectedFilter = ref('name')
+const selectedFilter = ref({ label: 'Name', value: 'name' })
 
 const filter = computed(() => {
   if (!search.value.trim()) return 'filter.php?c=Cocktail'
-
-  return selectedFilter.value === 'ingredient'
+  return selectedFilter.value.value === 'ingredient'
     ? `filter.php?i=${search.value}`
     : `search.php?s=${search.value}`
 })
 
 const { data, loading, fetchData } = useFetch()
+fetchData(filter.value)
 
-watch(filter, () => {
+watch([filter, selectedFilter], () => {
   fetchData(filter.value)
 })
 
 const goBack = () => {
   router.back()
 }
-
-// aquesta funcio no seria realment necessaria, ja que el q-input ja fa la mateixa funcio amb el watch
+// no seria realment necessaria ja que el v-bind y el watch fan el mateix, pero es per complir amb els requisits de la tasca
 const goToCocktail = () => {
   fetchData(filter.value)
 }
@@ -55,7 +54,7 @@ const goToCocktail = () => {
 
   <q-list v-if="!loading && data?.drinks">
     <q-item
-      v-for="drink in data?.drinks || []"
+      v-for="drink in data.drinks"
       :key="drink.idDrink"
       clickable
       v-ripple
