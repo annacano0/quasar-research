@@ -4,9 +4,14 @@
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title> Cocktail searcher </q-toolbar-title>
+        <q-toolbar-title>
+          <router-link to="/" class="text-white no-decoration">Sip & Shake</router-link>
+        </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>
+          Made by
+          <a href="https://github.com/annacano0" target="_blank" class="no-decoration">annacano0</a>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -30,46 +35,22 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev',
+    title: 'Home',
+    caption: 'Go to homepage',
+    icon: 'home',
+    link: '/',
   },
   {
     title: 'Github',
-    caption: 'github.com/quasarframework',
+    caption: 'See source code',
     icon: 'code',
-    link: 'https://github.com/quasarframework',
+    link: 'https://github.com/annacano0/quasar-research',
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev',
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev',
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev',
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev',
+    title: 'API Documentation',
+    caption: 'Cocktail API Reference',
+    icon: 'info',
+    link: 'https://www.thecocktaildb.com/api.php',
   },
 ]
 
@@ -79,3 +60,11 @@ function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 </script>
+
+<style lang="css" scoped>
+.no-decoration {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+</style>
