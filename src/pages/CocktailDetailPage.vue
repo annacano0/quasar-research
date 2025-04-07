@@ -32,13 +32,16 @@ watchEffect(() => {
 const toggleFavourites = () => {
   const favourites = JSON.parse(localStorage.getItem('favourites')) || []
   const drink = data.value.drinks[0]
+
   if (!isFavourite.value) {
     favourites.push(drink)
     localStorage.setItem('favourites', JSON.stringify(favourites))
+    isFavourite.value = true
     alert('Added to favourites!')
   } else {
     const updatedFavourites = favourites.filter((favourite) => favourite.idDrink !== drink.idDrink)
     localStorage.setItem('favourites', JSON.stringify(updatedFavourites))
+    isFavourite.value = false
     alert('Removed from favourites!')
   }
 }
