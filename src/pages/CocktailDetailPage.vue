@@ -88,15 +88,20 @@ function getMeasurements(drink) {
       <q-card class="cocktail-card">
         <h3 class="cocktail-title">{{ data.drinks[0].strDrink }}</h3>
 
-        <q-img :src="data.drinks[0].strDrinkThumb" class="cocktail-img" />
+        <q-img
+          :src="data.drinks[0].strDrinkThumb"
+          class="cocktail-img"
+          loading="lazy"
+          :alt="data.drinks[0].strDrink"
+        />
 
-        <q-card-section>
+        <section>
           <p class="cocktail-info"><strong>Category:</strong> {{ data.drinks[0].strCategory }}</p>
           <p class="cocktail-info"><strong>Type:</strong> {{ data.drinks[0].strAlcoholic }}</p>
           <p class="cocktail-info"><strong>Glass:</strong> {{ data.drinks[0].strGlass }}</p>
-        </q-card-section>
+        </section>
 
-        <q-card-section>
+        <section>
           <h4>Ingredients</h4>
           <ul class="cocktail-ingredients">
             <li v-for="(ingredient, index) in getIngredients(data.drinks[0])" :key="ingredient">
@@ -106,12 +111,12 @@ function getMeasurements(drink) {
               }}</span>
             </li>
           </ul>
-        </q-card-section>
+        </section>
 
-        <q-card-section>
+        <section>
           <h4>Instructions</h4>
           <p class="cocktail-instructions">{{ data.drinks[0].strInstructions }}</p>
-        </q-card-section>
+        </section>
       </q-card>
     </div>
 

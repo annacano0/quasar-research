@@ -1,18 +1,195 @@
 {
   "sections": [
     {
-      "title": "Installation",
-      "content": "This is the installation section.",
+      "title": "q-card",
+      "content": "És un contenidor versàtil per mostrar informació agrupada en format de targeta. És ideal si vols presentar dades de manera clara i visual.",
       "items": [
         {
-          "title": "Step 1",
-          "content": "This is the content for step 1."
+          "title": "clickable",
+          "content": "Fa que tota la targeta es pugui clicar com si fos un botó."
         },
         {
-          "title": "Step 2",
-          "content": "This is the content for step 2."
+          "title": "@click",
+          "content": "Permet fer alguna acció quan l’usuari fa clic a la targeta."
         }
       ]
+    },
+    {
+      "title": "q-img",
+      "content": "Serveix per mostrar imatges. Et permet carregar-les a poc a poc (lazy load), ajustar-les al contenidor i molt més.",
+      "items": [
+        {
+          "title": ":src",
+          "content": "És la font de la imatge, el que vols que es mostri."
+        },
+        {
+          "title": "alt",
+          "content": "Text que apareix si la imatge no es pot carregar. També millora l'accessibilitat."
+        },
+        {
+          "title": ":loading",
+          "content": "Decideix quan es carrega la imatge: 'lazy' per fer-ho quan entri a la pantalla, o 'eager' si vols carregar-la de seguida."
+        }
+      ]
+    },
+    {
+      "title": "q-btn",
+      "content": "Un botó que pots personalitzar totalment. Ideal per fer accions, enllaçar pàgines o mostrar icones.",
+      "items": [
+        {
+          "title": "label",
+          "content": "El text que veurà l’usuari al botó."
+        },
+        {
+          "title": "icon",
+          "content": "Una icona que acompanya el text (si n’hi ha)."
+        },
+        {
+          "title": "@click",
+          "content": "Funció que es crida quan es fa clic al botó."
+        },
+        {
+          "title": "color",
+          "content": "El color de fons del botó."
+        },
+        {
+          "title": "text-color",
+          "content": "El color del text del botó."
+        },
+        {
+          "title": "flat / dense / unelevated / no-caps",
+          "content": "Estils visuals que canvien l’aspecte del botó: pla, compacte, sense ombra i sense majúscules automàtiques."
+        },
+        {
+          "title": "to / href",
+          "content": "Si el botó ha de portar a una ruta de la web o a un enllaç extern."
+        },
+        {
+          "title": "target",
+          "content": "Si vols que l’enllaç s’obri en una nova pestanya, posa '_blank'."
+        }
+      ]
+    },
+    {
+      "title": "q-select",
+      "content": "Un desplegable que pots usar, per exemple, per filtrar resultats.",
+      "items": [
+        {
+          "title": "v-model",
+          "content": "Guarda l’opció que ha triat l’usuari."
+        },
+        {
+          "title": ":options",
+          "content": "És la llista d’opcions que es mostraran. Són objectes dins d’un array."
+        },
+        {
+          "title": "label",
+          "content": "El text que acompanya el desplegable, com una petita guia."
+        }
+      ]
+    },
+    {
+      "title": "q-input",
+      "content": "Camp per escriure text amb l’estètica de Quasar.",
+      "items": [
+        {
+          "title": "filled",
+          "content": "Mostra el camp amb un fons omplert, per destacar-lo."
+        },
+        {
+          "title": "v-model",
+          "content": "Desa automàticament el text que escriu l’usuari."
+        },
+        {
+          "title": "label",
+          "content": "Una etiqueta explicativa per saber què cal escriure."
+        },
+        {
+          "title": "debounce",
+          "content": "Retarda l’actualització del valor unes mil·lèsimes de segon. Va molt bé per evitar que es facin moltes cerques seguides."
+        }
+      ]
+    },
+    {
+      "title": "q-list",
+      "content": "Un contenidor per fer llistes boniques, amb opcions com separar elements o fer-los interactius.",
+      "items": [
+        {
+          "title": "v-if",
+          "content": "Només mostra la llista si hi ha resultats."
+        },
+        {
+          "title": "separator",
+          "content": "Afegeix línies divisòries entre els ítems de la llista."
+        }
+      ]
+    },
+    {
+      "title": "q-item",
+      "content": "Un element individual dins una llista. Pot reaccionar a clics.",
+      "items": [
+        {
+          "title": "v-for",
+          "content": "Serveix per crear múltiples ítems a partir d’un array."
+        },
+        {
+          "title": ":to",
+          "content": "Quan es fa clic, porta a la ruta que indiquis."
+        },
+        {
+          "title": "clickable",
+          "content": "Permet que l’element sigui clicable."
+        },
+        {
+          "title": "v-ripple",
+          "content": "Crea un efecte d'ona quan es fa clic, molt típic de Quasar."
+        }
+      ]
+    },
+    {
+      "title": "q-item-section",
+      "content": "Part d’un `q-item` que serveix per estructurar el contingut dins de l’ítem.",
+      "items": [
+        {
+          "title": "avatar",
+          "content": "Indica que aquesta secció mostrarà una imatge o avatar, i ajusta una mica l’estil."
+        }
+      ]
+    },
+    {
+      "title": "q-layout",
+      "content": "És l’esquelet principal de la teva aplicació. Organitza la capçalera, peu de pàgina i el contingut central. En aquest cas, ve inclòs per defecte amb el layout inicial.",
+      "items": [
+        {
+          "title": "view",
+          "content": "Configura com es disposen els elements (per exemple: lHh Lpr lFf)."
+        }
+      ]
+    },
+    {
+      "title": "q-header",
+      "content": "La capçalera que apareix a dalt de tot. Pot ser fixa o moure's amb el contingut. També ve inclosa en el layout inicial.",
+      "items": [
+        {
+          "title": "elevated",
+          "content": "Li dóna una ombra per fer que destaqui visualment."
+        }
+      ]
+    },
+    {
+      "title": "q-toolbar",
+      "content": "Barra dins la capçalera per posar títols, botons i altres controls. Forma part del layout inicial.",
+      "items": []
+    },
+    {
+      "title": "q-toolbar-title",
+      "content": "Zona dedicada al títol dins la barra d’eines. Pot contenir també enllaços o icones. Ve integrada al layout per defecte.",
+      "items": []
+    },
+    {
+      "title": "q-page-container",
+      "content": "És on va el contingut principal de cada pàgina dins del `q-layout`. També forma part del layout inicial.",
+      "items": []
     }
   ]
 }

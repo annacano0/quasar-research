@@ -16,10 +16,15 @@ const goToCocktail = () => {
 
 <template>
   <q-card clickable @click="goToCocktail" class="card">
-    <q-img :src="props.cocktail.strDrinkThumb" class="card-img" />
-    <q-card-section class="card-section">
+    <q-img
+      :src="props.cocktail.strDrinkThumb"
+      class="card-img"
+      loading="lazy"
+      :alt="props.cocktail.strDrink"
+    />
+    <section class="card-section">
       <h2 class="card-title">{{ props.cocktail.strDrink }}</h2>
-    </q-card-section>
+    </section>
   </q-card>
 </template>
 
@@ -38,7 +43,6 @@ const goToCocktail = () => {
 
 .card-img {
   height: 150px;
-  object-fit: cover;
 }
 
 .card-section {
@@ -51,8 +55,6 @@ const goToCocktail = () => {
   font-weight: 600;
   color: #333;
   margin-top: 10px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
 }
 

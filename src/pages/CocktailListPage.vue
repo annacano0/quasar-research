@@ -43,9 +43,6 @@ watch([filter, selectedFilter], () => {
         class="custom-input"
         debounce="300"
       >
-        <template v-slot:append>
-          <q-btn flat icon="search" @click="goToCocktail" class="search-btn" />
-        </template>
       </q-input>
     </section>
 
@@ -59,7 +56,13 @@ watch([filter, selectedFilter], () => {
         class="cocktail-item"
       >
         <q-item-section avatar>
-          <q-img :src="drink.strDrinkThumb" width="50px" class="drink-image" />
+          <q-img
+            :src="drink.strDrinkThumb"
+            width="50px"
+            class="drink-image"
+            loading="lazy"
+            :alt="drink.strDrink"
+          />
         </q-item-section>
         <q-item-section>
           <q-item-label class="drink-name">{{ drink.strDrink }}</q-item-label>
@@ -67,7 +70,7 @@ watch([filter, selectedFilter], () => {
       </q-item>
     </q-list>
 
-    <div v-else class="loading-text">Awaiting data...</div>
+    <div v-else class="loading-text">Looking for cocktails...</div>
   </div>
 </template>
 
