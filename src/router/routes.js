@@ -15,6 +15,8 @@ const routes = [
         component: () => import('pages/CocktailDetailPage.vue'),
         props: true,
       },
+      { path: '/favourites', component: () => import('pages/FavouritesPage.vue') },
+      { path: '/docs', component: () => import('pages/DocumentationPage.vue') },
     ],
   },
 

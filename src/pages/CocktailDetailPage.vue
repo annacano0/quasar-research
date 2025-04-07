@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { useFetch } from 'src/composables/useFetch'
-import { computed, watch } from 'vue'
+import { computed, watch, ref, watchEffect } from 'vue'
 
 const props = defineProps({
   id: String,
@@ -24,6 +24,27 @@ watch(cocktailId, () => {
 
 const goBack = () => {
   router.back()
+}
+
+const isFavourite = ref(false)
+
+watchEffect(() => {
+  const favourites = JSON.parse(localStorage.getItem('favourites')) || []
+  isFavourite.value = favourites.some((f) => f.idDrink === cocktailId.value)
+})
+
+const toggleFavourites = () => {
+  const favourites = JSON.parse(localStorage.getItem('favourites')) || []
+  const drink = data.value.drinks[0]
+  if (!isFavourite.value) {
+    favourites.push(drink)
+    localStorage.setItem('favourites', JSON.stringify(favourites))
+    alert('Added to favourites!')
+  } else {
+    const updatedFavourites = favourites.filter((favourite) => favourite.idDrink !== drink.idDrink)
+    localStorage.setItem('favourites', JSON.stringify(updatedFavourites))
+    alert('Removed from favourites!')
+  }
 }
 
 function getIngredients(drink) {
@@ -53,40 +74,44 @@ function getMeasurements(drink) {
   <div class="cocktail-container">
     <h2 v-if="!props.isRandom">Your Cocktail</h2>
     <h2 v-else>Your Random Cocktail</h2>
-
-    <q-btn
-      label="Go Back"
-      icon="arrow_back"
-      color="primary"
-      @click="goBack"
-      class="q-mb-md go-back-btn"
-    />
+    <div class="btn-container">
+      <q-btn label="Go Back" icon="arrow_back" color="primary" @click="goBack" class="q-mb-md" />
+      <q-btn
+        :label="isFavourite ? 'Remove' : 'Add'"
+        icon="favorite"
+        color="secondary"
+        @click="toggleFavourites"
+        class="q-mb-md"
+      />
+    </div>
 
     <div v-if="!loading && data?.drinks">
-      <q-card v-for="drink in data.drinks" :key="drink.idDrink" class="cocktail-card">
-        <h3 class="cocktail-title">{{ drink.strDrink }}</h3>
+      <q-card class="cocktail-card">
+        <h3 class="cocktail-title">{{ data.drinks[0].strDrink }}</h3>
 
-        <q-img :src="drink.strDrinkThumb" class="cocktail-img" />
+        <q-img :src="data.drinks[0].strDrinkThumb" class="cocktail-img" />
 
         <q-card-section>
-          <p class="cocktail-info"><strong>Category:</strong> {{ drink.strCategory }}</p>
-          <p class="cocktail-info"><strong>Type:</strong> {{ drink.strAlcoholic }}</p>
-          <p class="cocktail-info"><strong>Glass:</strong> {{ drink.strGlass }}</p>
+          <p class="cocktail-info"><strong>Category:</strong> {{ data.drinks[0].strCategory }}</p>
+          <p class="cocktail-info"><strong>Type:</strong> {{ data.drinks[0].strAlcoholic }}</p>
+          <p class="cocktail-info"><strong>Glass:</strong> {{ data.drinks[0].strGlass }}</p>
         </q-card-section>
 
         <q-card-section>
           <h4>Ingredients</h4>
           <ul class="cocktail-ingredients">
-            <li v-for="(ingredient, index) in getIngredients(drink)" :key="ingredient">
+            <li v-for="(ingredient, index) in getIngredients(data.drinks[0])" :key="ingredient">
               {{ ingredient }} -
-              <span class="measure">{{ getMeasurements(drink)[index] || 'No measure' }}</span>
+              <span class="measure">{{
+                getMeasurements(data.drinks[0])[index] || 'No measure'
+              }}</span>
             </li>
           </ul>
         </q-card-section>
 
         <q-card-section>
           <h4>Instructions</h4>
-          <p class="cocktail-instructions">{{ drink.strInstructions }}</p>
+          <p class="cocktail-instructions">{{ data.drinks[0].strInstructions }}</p>
         </q-card-section>
       </q-card>
     </div>
@@ -157,5 +182,10 @@ function getMeasurements(drink) {
 .loading-text {
   font-size: 18px;
   color: #888;
+}
+.btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 }
 </style>
