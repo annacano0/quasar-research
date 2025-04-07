@@ -15,23 +15,15 @@ const goToCocktail = () => {
 </script>
 
 <template>
-  <div class="favourite-card">
-    <q-card clickable @click="goToCocktail" class="card">
-      <q-img :src="props.cocktail.strDrinkThumb" class="card-img" />
-      <q-card-section class="card-section">
-        <h2 class="card-title">{{ props.cocktail.strDrink }}</h2>
-      </q-card-section>
-    </q-card>
-  </div>
+  <q-card clickable @click="goToCocktail" class="card">
+    <q-img :src="props.cocktail.strDrinkThumb" class="card-img" />
+    <q-card-section class="card-section">
+      <h2 class="card-title">{{ props.cocktail.strDrink }}</h2>
+    </q-card-section>
+  </q-card>
 </template>
 
 <style scoped>
-.favourite-card {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
 .card {
   width: 250px;
   border-radius: 10px;

@@ -1,7 +1,8 @@
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useFetch } from 'src/composables/useFetch'
 import { computed, watch, ref, watchEffect } from 'vue'
+import GoBackBtn from 'src/components/GoBackBtn.vue'
 
 const props = defineProps({
   id: String,
@@ -9,7 +10,6 @@ const props = defineProps({
 })
 
 const route = useRoute()
-const router = useRouter()
 
 const cocktailId = computed(() => route.params.id)
 
@@ -21,10 +21,6 @@ fetchData(filter.value)
 watch(cocktailId, () => {
   fetchData(filter.value)
 })
-
-const goBack = () => {
-  router.back()
-}
 
 const isFavourite = ref(false)
 
@@ -75,13 +71,13 @@ function getMeasurements(drink) {
     <h2 v-if="!props.isRandom">Your Cocktail</h2>
     <h2 v-else>Your Random Cocktail</h2>
     <div class="btn-container">
-      <q-btn label="Go Back" icon="arrow_back" color="primary" @click="goBack" class="q-mb-md" />
+      <GoBackBtn />
       <q-btn
         :label="isFavourite ? 'Remove' : 'Add'"
         icon="favorite"
         color="secondary"
         @click="toggleFavourites"
-        class="q-mb-md"
+        class="go-back-btn"
       />
     </div>
 
@@ -125,10 +121,6 @@ function getMeasurements(drink) {
   max-width: 600px;
   margin: auto;
   text-align: center;
-}
-
-.go-back-btn {
-  margin-bottom: 20px;
 }
 
 .cocktail-card {
@@ -185,7 +177,7 @@ function getMeasurements(drink) {
 }
 .btn-container {
   display: flex;
-  justify-content: center;
-  gap: 15px;
+  justify-content: space-around;
+  margin: 20px;
 }
 </style>

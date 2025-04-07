@@ -1,9 +1,8 @@
 <script setup>
 import { useFetch } from 'src/composables/useFetch'
-import { useRouter } from 'vue-router'
 import { ref, computed, watch } from 'vue'
+import GoBackBtn from 'src/components/GoBackBtn.vue'
 
-const router = useRouter()
 const search = ref('')
 const selectedFilter = ref({ label: 'Name', value: 'name' })
 
@@ -20,26 +19,11 @@ fetchData(filter.value)
 watch([filter, selectedFilter], () => {
   fetchData(filter.value)
 })
-
-const goBack = () => {
-  router.back()
-}
-// no seria realment necessaria ja que el v-bind y el watch fan el mateix, pero es per complir amb els requisits de la tasca
-const goToCocktail = () => {
-  fetchData(filter.value)
-}
 </script>
 <template>
   <div class="search-container">
     <h2 class="title">Make your search</h2>
-    <q-btn
-      label="Go Back"
-      icon="arrow_back"
-      color="white"
-      text-color="black"
-      @click="goBack"
-      class="back-btn"
-    />
+    <GoBackBtn class="back-btn" />
 
     <section class="search-section">
       <q-select
@@ -103,10 +87,6 @@ const goToCocktail = () => {
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   margin-bottom: 15px;
-}
-
-.back-btn {
-  margin-bottom: 20px;
 }
 
 .search-section {

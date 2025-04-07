@@ -6,6 +6,9 @@
       <q-btn to="/cocktails" label="Search" class="btn" />
       <q-btn to="/cocktails/random" label="Randomize" class="btn" />
     </div>
+    <router-link to="/docs" class="text-white no-decoration link"
+      >See documentation for the APP</router-link
+    >
   </div>
 </template>
 
@@ -41,6 +44,10 @@
 .button-container {
   display: flex;
   gap: 15px;
+}
+
+.link {
+  padding: 1em;
 }
 
 .btn {
