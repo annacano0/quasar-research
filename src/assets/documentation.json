@@ -16,7 +16,7 @@
     },
     {
       "title": "q-img",
-      "content": "Serveix per mostrar imatges. Et permet carregar-les a poc a poc (lazy load), ajustar-les al contenidor i molt més.",
+      "content": "Serveix per mostrar imatges. Et permet carregar-les a poc a poc, ajustar-les al contenidor i molt més.",
       "items": [
         {
           "title": ":src",
@@ -28,7 +28,7 @@
         },
         {
           "title": ":loading",
-          "content": "Decideix quan es carrega la imatge: 'lazy' per fer-ho quan entri a la pantalla, o 'eager' si vols carregar-la de seguida."
+          "content": "Decideix quan es carrega la imatge: 'lazy' per fer-ho quan entri a la pantalla (estigui en el viewport), o 'eager' si vols carregar-la en carregar la pagina"
         }
       ]
     },

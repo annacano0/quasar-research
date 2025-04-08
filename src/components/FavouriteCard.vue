@@ -16,12 +16,7 @@ const goToCocktail = () => {
 
 <template>
   <q-card clickable @click="goToCocktail" class="card">
-    <q-img
-      :src="props.cocktail.strDrinkThumb"
-      class="card-img"
-      loading="lazy"
-      :alt="props.cocktail.strDrink"
-    />
+    <q-img :src="props.cocktail.strDrinkThumb" class="card-img" :alt="props.cocktail.strDrink" />
     <section class="card-section">
       <h2 class="card-title">{{ props.cocktail.strDrink }}</h2>
     </section>

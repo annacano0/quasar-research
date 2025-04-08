@@ -91,7 +91,6 @@ function getMeasurements(drink) {
         <q-img
           :src="data.drinks[0].strDrinkThumb"
           class="cocktail-img"
-          loading="lazy"
           :alt="data.drinks[0].strDrink"
         />
 
@@ -142,6 +141,7 @@ function getMeasurements(drink) {
 .cocktail-img {
   width: 100%;
   border-radius: 12px;
+  margin-bottom: 1.5em;
 }
 
 .cocktail-title {
